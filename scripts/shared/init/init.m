@@ -4,7 +4,7 @@ function config = init()
 config = [];
 
 % Paths
-config.path.demographic = '../../data/excel';
+config.path.demographic = '../../excel';
 config.path.plv = '../../data/plv';
 config.path.ciplv = '../../data/ciplv';
 config.path.stats = '../../results/stats';

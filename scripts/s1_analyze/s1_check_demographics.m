@@ -1,25 +1,40 @@
+%%%
+% Check demographic differences for the selected sub-group
+% 
+% Created on 29/04/2025
+% 
+% @author: Fede
+%%%
+
 clear
 clc
 restoredefaultpath
 
-% Paths
-config.path.demographic = '../../data/excel';
+% Add the path functions
+addpath(fullfile('..','shared','init'))
+addpath(fullfile('..','shared','io'))
+
+% Load the configuration
+config = init();
 
 % Read the Excel file
-dummy_filename = sprintf('%s/data_all.xlsx',config.path.demographic);
-excel = readcell(dummy_filename,'Sheet','SPAIN','Range','A1:DM109');
-
-% Select only the included ones
+dummy_filename = sprintf('%s/SEPNECA_data.xlsx',config.path.demographic);
+excel = readcell(dummy_filename,'Sheet','all');
 headers = excel(1,:);
-excel = excel(2:end,:);
-included_mask = logical(cell2mat(excel(:,6)));
-excel = excel(included_mask,:);
+data = excel(2:end,:);
+
+% Get the included mask
+field_index = strcmp('included',headers);
+included_mask = logical(cell2mat(data(:,field_index)));
+data = data(included_mask,:);
 
 % Divide the information
-subjects = excel(:,1);
-group = cell2mat(excel(:,4));
-age = cell2mat( excel(:,7) );
-sex = cell2mat( excel(:,8) );
+field_index = strcmp('conversion',headers);
+group = cell2mat(data(:,field_index));
+field_index = strcmp('age',headers);
+age = cell2mat( data(:,field_index) );
+field_index = strcmp('sex',headers);
+sex = data(:,field_index);
 
 % Check the age
 [p_age, anova_tbl, anova_stats] = anova1(age,group,'off');
@@ -33,8 +48,14 @@ index_no_converters = group == 0;
 index_converters = group == 1;
 fprintf('No converters - Converters\n')
 fprintf('%i - %i\n', sum(index_no_converters), sum(index_converters))
-fprintf('%.2f +- %.2f - %.2f +- %.2f\n', mean(age(index_no_converters)),std(age(index_no_converters)),...
-    mean(age(index_converters)),std(age(index_converters)))
-fprintf('%i (M)/%i (F) - %i (M)/%i (F)\n', sum(sex(index_no_converters) == 1),sum(sex(index_no_converters) == 2),...
-    sum(sex(index_converters) == 1),sum(sex(index_converters) == 2))
+fprintf('%.2f +- %.2f - %.2f +- %.2f --- p = %.3f\n', ...
+    mean(age(index_no_converters)),std(age(index_no_converters)),...
+    mean(age(index_converters)),std(age(index_converters)),...
+    p_age)
+fprintf('%i (M)/%i (F) - %i (M)/%i (F) --- p = %.3f\n', ...
+    sum(strcmp('male', sex(index_no_converters))), ...
+    sum(strcmp('female', sex(index_no_converters))), ...
+    sum(strcmp('male', sex(index_converters))), ...
+    sum(strcmp('female', sex(index_converters))),...
+    p_sex);
 fprintf('\n\n')
