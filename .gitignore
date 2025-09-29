@@ -1,0 +1,10 @@
+# Ignore Python and Pycharm folder
+.idea/
+.venv/
+*pycache*
+
+# Ignore .mat files (data)
+*.mat
+
+# Ignore Excel
+*.xlsx
