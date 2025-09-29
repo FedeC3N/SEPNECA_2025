@@ -98,17 +98,17 @@ for isubject = 1 : numel(subjects)
     current_measures = load(current_file);
     
     % Store
-    if ~isempty(current_measures.pow.('v1'))
-        measure_all(:,:,isubject,1) = current_measures.pow.('v1');
+    if ~isempty(current_measures.('spectrum_norm_v1'))
+        measure_all(:,:,isubject,1) = current_measures.('spectrum_norm_v1');
     end
-    if ~isempty(current_measures.pow.('v2'))
-        measure_all(:,:,isubject,2) = current_measures.pow.('v2');
+    if ~isempty(current_measures.('spectrum_norm_v2'))
+        measure_all(:,:,isubject,2) = current_measures.('spectrum_norm_v2');
     end
-    if ~isempty(current_measures.pow.('v3'))
-        measure_all(:,:,isubject,3) = current_measures.pow.('v3');
+    if ~isempty(current_measures.('spectrum_norm_v3'))
+        measure_all(:,:,isubject,3) = current_measures.('spectrum_norm_v3');
     end
-    if ~isempty(current_measures.pow.('v4'))
-        measure_all(:,:,isubject,4) = current_measures.pow.('v4');
+    if ~isempty(current_measures.('spectrum_norm_v4'))
+        measure_all(:,:,isubject,4) = current_measures.('spectrum_norm_v4');
     end
     
 

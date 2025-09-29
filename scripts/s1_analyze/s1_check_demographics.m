@@ -19,22 +19,17 @@ config = init();
 
 % Read the Excel file
 dummy_filename = sprintf('%s/SEPNECA_data.xlsx',config.path.demographic);
-excel = readcell(dummy_filename,'Sheet','all');
+excel = readcell(dummy_filename,'Sheet','to_use');
 headers = excel(1,:);
 data = excel(2:end,:);
 
-% Get the included mask
-field_index = strcmp('included',headers);
-included_mask = logical(cell2mat(data(:,field_index)));
-data = data(included_mask,:);
-
 % Divide the information
-field_index = strcmp('conversion',headers);
-group = cell2mat(data(:,field_index));
-field_index = strcmp('age',headers);
-age = cell2mat( data(:,field_index) );
-field_index = strcmp('sex',headers);
-sex = data(:,field_index);
+column_of_interest = strcmp('conversion',headers);
+group = cell2mat(data(:,column_of_interest));
+column_of_interest = strcmp('age',headers);
+age = cell2mat( data(:,column_of_interest) );
+column_of_interest = strcmp('sex',headers);
+sex = data(:,column_of_interest);
 
 % Check the age
 [p_age, anova_tbl, anova_stats] = anova1(age,group,'off');

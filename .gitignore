@@ -8,3 +8,6 @@
 
 # Ignore Excel
 *.xlsx
+
+# Ignore pictures
+*.png

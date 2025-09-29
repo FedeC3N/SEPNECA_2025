@@ -12,7 +12,7 @@ config = init();
 
 % PLV
 config.groups_selected = [0 1];
-config.measure = 'ciplv';
+config.measure = 'pow';
 config.stats = 'measure_baseline_ttest';
 feval(config.stats,config)
 

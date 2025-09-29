@@ -3,7 +3,7 @@ function ptau = load_ptau(config)
 
 % Read the Excel files
 dummy_filename = sprintf('%s/SEPNECA_data.xlsx',config.path.demographic);
-data = readcell(dummy_filename,'Sheet','all');
+data = readcell(dummy_filename,'Sheet','to_use');
 
 % Split header - data
 headers = data(1,:);

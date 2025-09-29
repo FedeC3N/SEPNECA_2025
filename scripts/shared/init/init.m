@@ -7,6 +7,7 @@ config = [];
 config.path.demographic = '../../excel';
 config.path.plv = '../../data/plv';
 config.path.ciplv = '../../data/ciplv';
+config.path.pow = '../../data/pow';
 config.path.stats = '../../results/stats';
 config.path.figures = '../../results/figures';
 
@@ -16,6 +17,7 @@ if ~exist(config.path.figures), mkdir(config.path.figures), end
 
 % Bands
 config.bands = {'delta','theta','alpha','low_beta','high_beta','gamma'};
+config.bands_freqs = [2 4 ; 4 8 ; 8 13 ; 13 20 ; 20 30 ; 30 45];
 
 % Channels
 config.complete_channel_labels = {'Fp1', 'Fpz', 'Fp2', 'F7', 'F3', 'Fz', 'F4', 'F8', 'FC5', 'FC1', 'FC2', 'FC6',...

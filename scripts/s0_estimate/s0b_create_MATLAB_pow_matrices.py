@@ -40,14 +40,19 @@ for current_subject in subjects:
     # Check if overwrite
     dummy_name = current_subject + '-pow.mat'
     outfile = os.path.join(config['paths']['pow']['out'], dummy_name)
-    if os.path.exists(outfile):
+    if os.path.exists(outfile) and not(config['overwrite']):
         print('  Already calculated. Skip.')
         continue
 
-    pow_dict = {'1': [],
+    spectrum_dict = {'1': [],
                 '2': [],
                 '3': [],
                 '4': []}
+
+    spectrum_norm_dict = {'1': [],
+                     '2': [],
+                     '3': [],
+                     '4': []}
 
     bads_dict = {'1': [],
                 '2': [],
@@ -80,17 +85,23 @@ for current_subject in subjects:
 
         # Save the
         current_visit = current_session[6]
-        pow_dict[current_visit] = spectrum
+        spectrum_dict[current_visit] = spectrum
+        total = np.sum(spectrum, axis=1)
+        spectrum_norm = spectrum / total[:, np.newaxis]
+        spectrum_norm_dict[current_visit] = spectrum_norm
         bads_dict[current_visit] =raw.info['bads']
 
     # Save as MATLAB file
     # Convert the matrix to dictionary
     out = {
-        'pow':{
-                'v1': pow_dict['1'],
-                'v2': pow_dict['2'],
-                'v3': pow_dict['3'],
-                'v4': pow_dict['4']},
+        'spectrum_v1': spectrum_dict['1'],
+        'spectrum_v2': spectrum_dict['2'],
+        'spectrum_v3': spectrum_dict['3'],
+        'spectrum_v4': spectrum_dict['4'],
+        'spectrum_norm_v1': spectrum_dict['1'],
+        'spectrum_norm_v2': spectrum_dict['2'],
+        'spectrum_norm_v3': spectrum_dict['3'],
+        'spectrum_norm_v4': spectrum_dict['4'],
         'bads': {
             'v1': bads_dict['1'],
             'v2': bads_dict['2'],

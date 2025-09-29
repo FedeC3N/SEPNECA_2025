@@ -1,10 +1,10 @@
-function [participant_id,session_id,clin_outcome,age,sex] = load_demographics(config)
+function [participant_id,session_id,group,age,sex] = load_demographics(config)
 
 % Read the demographic functions from Excel
 
 % Read the Excel file
 dummy_filename = sprintf('%s/SEPNECA_data.xlsx',config.path.demographic);
-data = readcell(dummy_filename,'Sheet','all');
+data = readcell(dummy_filename,'Sheet','to_use');
 
 % Split header-data
 headers = data(1,:);
@@ -21,10 +21,10 @@ session_id = data(:,column_of_interest);
 session_id(cellfun(@isempty, session_id)) = {NaN};
 
 % clin_outcome
-column_of_interest = strcmp(headers,'clin_outcome');
-clin_outcome = data(:,column_of_interest);
-clin_outcome(cellfun(@isempty, clin_outcome)) = {NaN};
-clin_outcome = cell2mat(clin_outcome);
+column_of_interest = strcmp(headers,'conversion');
+group = data(:,column_of_interest);
+group(cellfun(@isempty, group)) = {NaN};
+group = cell2mat(group);
 
 % age
 column_of_interest = strcmp(headers,'age');

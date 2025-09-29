@@ -36,7 +36,7 @@ switch config.correct
             % Get significant (corrected) values if any
             current_significant = false(size(p_vector_sorted));
             if numel(index_significant) > 0
-                current_significant(1:index_significant,iband) = true;
+                current_significant(1:index_significant) = true;
             end
             
             
