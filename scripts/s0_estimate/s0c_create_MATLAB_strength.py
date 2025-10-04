@@ -29,7 +29,6 @@ subjects = load_session(config)
 
 # Dimensions
 n_channels = 126
-n_links = int(n_channels*(n_channels-1)/2)
 n_subjects = len(subjects)
 n_bands = len(config['bands'])
 
@@ -39,17 +38,16 @@ for current_subject in subjects:
     print('Working on ' + current_subject)
 
     # Check if overwrite
-    dummy_name = current_subject + '-plv.mat'
-    outfile = os.path.join(config['paths']['plv']['out'], dummy_name)
+    dummy_name = current_subject + '-strength.mat'
+    outfile = os.path.join(config['paths']['strength']['out'], dummy_name)
     if os.path.exists(outfile) and not(config['overwrite']):
         print('  Already calculated. Skip.')
         continue
 
-    # Create matrices
-    plv_dict = {'1': np.full((n_links,n_bands),np.nan),
-                '2': np.full((n_links,n_bands),np.nan),
-                '3': np.full((n_links,n_bands),np.nan),
-                '4': np.full((n_links,n_bands),np.nan)}
+    strength_dict = {'1': np.full((n_channels, n_bands), np.nan),
+                '2': np.full((n_channels, n_bands), np.nan),
+                '3': np.full((n_channels, n_bands), np.nan),
+                '4': np.full((n_channels, n_bands), np.nan)}
 
     # For each band
     for iband in range(n_bands):
@@ -73,15 +71,18 @@ for current_subject in subjects:
             # Load PLV_v1 in vector form (triu)
             dummy_plv = data.get_data()
             current_visit = current_session[6]
-            plv_dict[current_visit][:,iband] = dummy_plv[np.triu_indices(dummy_plv.shape[0], k=1)]
+
+            # Estimate the strength
+            mask = ~np.eye(dummy_plv.shape[0], dtype=bool)
+            strength_dict[current_visit][:,iband] = np.sum(dummy_plv * mask, axis=0) / (dummy_plv.shape[0] - 1)
 
     # Save as MATLAB file
     # Convert the matrix to dictionary
-    out = {'plv_v1': plv_dict['1'],
-           'plv_v2': plv_dict['2'],
-           'plv_v3': plv_dict['3'],
-           'plv_v4': plv_dict['4'],
-           'dimensions_plv_dict': 'channels x links',
+    out = {'strength_v1': strength_dict['1'],
+           'strength_v2': strength_dict['2'],
+           'strength_v3': strength_dict['3'],
+           'strength_v4': strength_dict['4'],
+           'dimensions_strength_dict': 'channels x bands',
            'bands': config['bands']
            }
     scipy.io.savemat(outfile,out)
