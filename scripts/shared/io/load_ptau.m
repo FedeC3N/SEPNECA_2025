@@ -15,6 +15,12 @@ ptau181 = data(:,column_of_interest);
 ptau181(cellfun(@ismissing, ptau181)) = {NaN};
 ptau181 = cell2mat(ptau181);
 
+% ptau217
+column_of_interest = strcmp(headers,'ptau217');
+ptau217 = data(:,column_of_interest);
+ptau217(cellfun(@ismissing, ptau217)) = {NaN};
+ptau217 = cell2mat(ptau217);
+
 % ptau231
 column_of_interest = strcmp(headers,'ptau231');
 ptau231 = data(:,column_of_interest);
@@ -24,6 +30,7 @@ ptau231 = cell2mat(ptau231);
 % Output
 ptau = [];
 ptau.ptau181 = ptau181;
+ptau.ptau217 = ptau217;
 ptau.ptau231 = ptau231;
 
 end
