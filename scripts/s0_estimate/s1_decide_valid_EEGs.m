@@ -12,18 +12,19 @@ clc
 restoredefaultpath
 
 % Add the path functions
-addpath(fullfile('..','init'))
-addpath(fullfile('..','io'))
+addpath(fullfile('..','shared','init'))
+addpath(fullfile('..','shared','io'))
 
 % Load the configuration
 config = init();
 
 % Load the data
 % Read the Excel file
-dummy_filename = '../../../excel/SEPNECA_data.xlsx';
+dummy_filename = '../../excel/SEPNECA_data.xlsx';
 excel = readcell(dummy_filename,'Sheet','all');
-excel = excel(2:end,:);
-subjects = excel(:,1);
+headers = excel(1,:);
+data_all = excel(2:end,:);
+subjects = data_all(:,1);
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -37,7 +38,7 @@ for isubject = 1 : numel(subjects)
     % Load the file
     current_subject = subjects{isubject};
     current_subject = current_subject(1:5);
-    current_file = sprintf('../../../data/%s/%s-%s.mat',...
+    current_file = sprintf('../../data/%s/%s-%s.mat',...
         config.measure, current_subject,config.measure);
     if ~exist(current_file)
         continue
@@ -76,8 +77,6 @@ valid_rest_visits = valid_rest_visits > 0;
 plv_valid_index = valid_visit_1 & valid_rest_visits;
 plv_valid_index = int16(plv_valid_index');
 
-%%%%
-% COPY valid_index TO THE EXCEL
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%% POW
@@ -90,7 +89,7 @@ for isubject = 1 : numel(subjects)
     % Load the file
     current_subject = subjects{isubject};
     current_subject = current_subject(1:5);
-    current_file = sprintf('../../../data/%s/%s-%s.mat',...
+    current_file = sprintf('../../data/%s/%s-%s.mat',...
         config.measure, current_subject,config.measure);
     if ~exist(current_file)
         continue
@@ -130,3 +129,7 @@ valid_rest_visits = valid_rest_visits > 0;
 % Valid index
 pow_valid_index = valid_visit_1 & valid_rest_visits;
 pow_valid_index = int16(pow_valid_index);
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MANUALLY COPY THE VALID INDEX TO THE EXCEL
