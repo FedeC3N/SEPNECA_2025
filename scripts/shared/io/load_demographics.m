@@ -22,6 +22,7 @@ session_id(cellfun(@isempty, session_id)) = {NaN};
 
 % clin_outcome
 column_of_interest = strcmp(headers,'conversion');
+% column_of_interest = strcmp(headers,'clin_outcome');
 group = data(:,column_of_interest);
 group(cellfun(@isempty, group)) = {NaN};
 group = cell2mat(group);

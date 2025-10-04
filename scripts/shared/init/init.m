@@ -8,6 +8,7 @@ config.path.demographic = '../../excel';
 config.path.plv = '../../data/plv';
 config.path.ciplv = '../../data/ciplv';
 config.path.pow = '../../data/pow';
+config.path.strength = '../../data/strength';
 config.path.stats = '../../results/stats';
 config.path.figures = '../../results/figures';
 
@@ -31,6 +32,7 @@ config.complete_channel_labels = {'Fp1', 'Fpz', 'Fp2', 'F7', 'F3', 'Fz', 'F4', '
     'AFF5h', 'AFF6h', 'FFT7h', 'FFC1h', 'FFC2h', 'FFT8h', 'FTT9h', 'FTT7h', 'FCC1h', 'FCC2h', 'FTT8h',...
     'FTT10h', 'TTP7h', 'CCP1h', 'CCP2h', 'TTP8h', 'TPP7h', 'CPP1h', 'CPP2h', 'TPP8h', 'PPO9h', 'PPO5h',...
     'PPO6h', 'PPO10h', 'POO9h', 'POO3h', 'POO4h', 'POO10h', 'OI1h', 'OI2h'};
+config.occipital_channels = cellfun(@(x) contains(x, 'O'), config.complete_channel_labels);
 
 % To find the pair of channels in the original 126 x 126 matrix
 [row_idx, col_idx] = find(triu(true(126),1));

@@ -13,7 +13,7 @@ config = init();
 % PLV
 config.groups_selected = [0 1];
 config.measure = 'pow';
-config.stats = 'measure_baseline_ttest';
+config.stats = 'measure_ratio_ttest';
 feval(config.stats,config)
 
 

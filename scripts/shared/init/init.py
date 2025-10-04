@@ -28,12 +28,15 @@ def init_config():
 
     config['paths']['plv'] = {'out':os.path.join(base,'data','plv')}
     config['paths']['pow'] = {'out': os.path.join(base,'data', 'pow')}
+    config['paths']['strength'] = {'out': os.path.join(base, 'data', 'strength')}
 
     # Create output folder if it not exists
     if not os.path.exists(config['paths']['plv']['out']):
         os.mkdir(config['paths']['plv']['out'])
     if not os.path.exists(config['paths']['pow']['out']):
         os.mkdir(config['paths']['pow']['out'])
+    if not os.path.exists(config['paths']['strength']['out']):
+        os.mkdir(config['paths']['strength']['out'])
 
     # Define visits of interest
     config['visits'] = ['1','2','3','4']
