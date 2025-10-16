@@ -38,7 +38,7 @@ for iband = 1 : numel(config.bands)
         % Create vectors for ANOVAN model
         measure_v1 = measure.baseline(ipair,:,iband)';
         
-        [~,p,CI,stats] = ttest2(measure_v1(group==0),measure_v1(group==1));
+        [~,p,CI,stats] = ttest2(measure_v1(group==1),measure_v1(group==0));
         
         % Save the results
         p_original(ipair, iband) = p;
@@ -80,7 +80,7 @@ for iband = 1 : numel(config.bands)
             measure.freqs < config.bands_freqs(iband,2);
         measure_v1 = squeeze(sum(measure.baseline(isensor,freqs_index,:),2));
         
-        [~,p,CI,stats] = ttest2(measure_v1(group==0),measure_v1(group==1));
+        [~,p,CI,stats] = ttest2(measure_v1(group==1),measure_v1(group==0));
         
         % Save the results
         p_original(isensor, iband) = p;
@@ -121,7 +121,7 @@ for iband = 1 : numel(config.bands)
         % Create vectors for ANOVAN model
         measure_v1 = measure.baseline(isensor,:,iband)';
         
-        [~,p,CI,stats] = ttest2(measure_v1(group==0),measure_v1(group==1));
+        [~,p,CI,stats] = ttest2(measure_v1(group==1),measure_v1(group==0));
         
         % Save the results
         p_original(isensor, iband) = p;

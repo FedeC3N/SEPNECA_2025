@@ -20,8 +20,8 @@ config.correct= 'no'; % 'no', 'Bonferroni', 'BHFDR'
 config.q = 0.2;
 
 % Plot
-config.plot = 'plot_significant_links';
-feval(config.plot,config)
+% config.plot = 'plot_significant_links';
+% feval(config.plot,config)
 
 % config.plot = 'plot_global_measure_evolution';
 % feval(config.plot,config)
@@ -37,6 +37,9 @@ feval(config.plot,config)
 
 % config.plot = 'plot_measure_evolution';
 % feval(config.plot,config)
+
+config.plot = 'plot_significant_head';
+feval(config.plot,config)
 
 
 

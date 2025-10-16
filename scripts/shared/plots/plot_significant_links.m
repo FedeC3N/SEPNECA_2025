@@ -46,10 +46,10 @@ for iband = 1 : numel(config.band_of_interest)
 
     %%%%%%%%%%%%%%
     % Plot significant sensors in head
-    % No converters > Converters
+    % Converters > No Converters
     subplot(2,2,1)
     hold on
-    colors = [0 0 1; 1 0 0];
+    colors = [1 0 0; 0 0 1];
     % Plot the head with sensors empty
     [pos_elec, size_elec] = draw_head(config);
 
@@ -76,7 +76,7 @@ for iband = 1 : numel(config.band_of_interest)
     % Enhance the plot
     title(config.bands{current_band},'Interpreter','none')
 
-    % No converters < Converters
+    % Converters < No Converters
     subplot(2,2,3)
     hold on
     % Plot the head with sensors empty
@@ -234,10 +234,10 @@ for iband = 1 : numel(config.band_of_interest)
 
     %%%%%%%%%%%%%%
     % Plot significant sensors in head
-    % No converters > Converters
+    % Converters > No Converters
     subplot(2,2,1)
     hold on
-    colors = [0 0 1; 1 0 0];
+    colors = [1 0 0; 0 0 1];
     % Plot the head with sensors empty
     [pos_elec, size_elec] = draw_head(config);
 
@@ -249,7 +249,7 @@ for iband = 1 : numel(config.band_of_interest)
     scatter(pos_elec(to_plot_index,1),pos_elec(to_plot_index,2),size_elec(to_plot_index),colors(1,:),'filled')
     title(config.bands{current_band},'Interpreter','none')
 
-    % No converters < Converters
+    % Converters < No converters
     subplot(2,2,3)
     hold on
     % Plot the head with sensors empty
@@ -265,7 +265,7 @@ for iband = 1 : numel(config.band_of_interest)
 
     %%%%%%%%%%%%%%
     % Plot the original power spectrum
-    % No converters > Converters
+    % Converters > No Converters
     colors = [0    0.4470    0.7410;
         0.8500    0.3250    0.0980;
         0.9290    0.6940    0.1250];
@@ -284,7 +284,7 @@ for iband = 1 : numel(config.band_of_interest)
     legend({'No Converters', 'Converters'});
     title(config.bands{current_band},'Interpreter','none')
 
-    % No converters < Converters
+    % Converters < No converters
     current_significant = significant_mask < 0;
     for igroup = 0 : numel(unique(group)) - 1
 
@@ -337,10 +337,10 @@ for iband = 1 : numel(config.band_of_interest)
 
     %%%%%%%%%%%%%%
     % Plot significant sensors in head
-    % No converters > Converters
+    % Converters > No Converters
     subplot(2,2,1)
     hold on
-    colors = [0 0 1; 1 0 0];
+    colors = [1 0 0; 0 0 1];
     % Plot the head with sensors empty
     [pos_elec, size_elec] = draw_head(config);
 
@@ -351,7 +351,7 @@ for iband = 1 : numel(config.band_of_interest)
     % Enhance the plot
     title(config.bands{current_band},'Interpreter','none')
 
-    % No converters < Converters
+    % Converters < No Converters
     subplot(2,2,3)
     hold on
     % Plot the head with sensors empty
@@ -367,7 +367,7 @@ for iband = 1 : numel(config.band_of_interest)
 
     %%%%%%%%%%%%%%
     % Plot the evolution along visits
-    % No converters > Converters
+    % Converters > No Converters
     colors = [0    0.4470    0.7410;
         0.8500    0.3250    0.0980;
         0.9290    0.6940    0.1250];
@@ -394,7 +394,7 @@ for iband = 1 : numel(config.band_of_interest)
     legend({'No Converters', 'Converters'});
     title(config.bands{current_band},'Interpreter','none')
 
-    % No converters < Converters
+    % Converters < No Converters
     current_significant = significant_mask < 0;
     for igroup = 0 : numel(unique(group)) - 1
 
